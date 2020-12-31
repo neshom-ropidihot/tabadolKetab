@@ -13,6 +13,9 @@
           <v-container>
             <nationalId :autofocus="true" @setNationalId="setNationalId" />
             <password />
+            <p class="primary--text forgotPassword" @click="forgotPassword">
+              آیا رمز عبور خود را فراموش کرده اید؟
+            </p>
             <v-row>
               <v-col cols="12" md="12">
                 <v-row>
@@ -68,6 +71,7 @@ export default {
       nationalId: null,
       captcha: '',
       valid: false,
+      forgotPass: false,
     };
   },
   methods: {
@@ -95,6 +99,9 @@ export default {
     registerLink() {
       this.$router.push({ name: 'signup' });
     },
+    forgotPassword() {
+      this.$router.push({ name: 'forgotpassword' });
+    },
   },
 };
 </script>
@@ -103,5 +110,8 @@ export default {
   cursor: pointer;
   text-align: center;
   padding: 8px;
+}
+.forgotPassword {
+  cursor: pointer;
 }
 </style>

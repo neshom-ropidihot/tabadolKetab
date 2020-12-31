@@ -30,37 +30,22 @@
               </v-tab>
 
               <v-tab-item>
-                <v-card flat>
-                  <v-card-text>
-                    <template>
-                      <v-simple-table>
-                        <template v-slot:default>
-                          <tbody>
-                            <tr v-for="item in info" :key="item.name">
-                              <td>{{ item.name }}</td>
-                              <td>{{ item.value }}</td>
-                            </tr>
-                          </tbody>
-                        </template>
-                      </v-simple-table>
-                    </template>
-                  </v-card-text>
-                </v-card>
+                <profileTable :tableData="info" />
               </v-tab-item>
+
               <v-tab-item>
                 <v-card flat>
                   <v-card-text>
                     <editUser :mode="'edit'" />
-                    <addUser />
                   </v-card-text>
                 </v-card>
               </v-tab-item>
               <v-tab-item>
                 <v-card flat>
                   <v-card-text>
-                    <passwords :mode="'edit'" />
+                    <passwords @setPassword="setPassword" :mode="'edit'" />
                     <div class="justify-center d-flex">
-                      <v-btn color="success" class="mr-4">
+                      <v-btn color="success" class="mr-4" @click="validatePass">
                         {{ $t('save') }}
                       </v-btn>
                       <v-btn color="error" class="mr-4"
@@ -81,6 +66,7 @@
 <script>
 import editUser from './addUser.vue';
 import passwords from '../userControls/passwords.vue';
+import profileTable from './profileTable.vue';
 
 export default {
   name: 'profilecmp',
@@ -88,11 +74,13 @@ export default {
   components: {
     editUser,
     passwords,
+    profileTable,
   },
   data() {
     return {
       valid: true,
       saveSuccess: false,
+      password: '',
       info: [
         {
           name: 'نام',
@@ -145,7 +133,13 @@ export default {
       ],
     };
   },
-  methods: {},
+  methods: {
+    setPassword(value) {
+      this.password = value;
+      this.$emit('setPassword', this.password);
+    },
+    validatePass() {},
+  },
 };
 </script>
 <style lang="scss" scoped>

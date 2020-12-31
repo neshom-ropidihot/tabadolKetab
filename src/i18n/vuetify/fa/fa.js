@@ -61,6 +61,7 @@ export default {
   user: 'کاربر',
   profile: 'پروفایل',
   id: 'شناسه',
+  forgotPassword: 'فراموشی رمزعبور',
   // signup
   signUp: 'ثبت نام',
   website: 'وب سایت',
